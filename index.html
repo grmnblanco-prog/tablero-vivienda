@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tablero Estratégico - Portafolio de Vivienda</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="brand">
+            <span>🏛️ MINVIVIENDA</span>
+        </div>
+        <div class="nav-item active" data-id="global">📊 Global Portafolio</div>
+        <div class="nav-item" data-id="panorama">📈 Panorama Programas</div>
+        <div class="nav-item" data-id="riesgos">⚠️ Matriz de Riesgo</div>
+        <div class="nav-item" id="nav-hojaruta" data-id="hojaruta">🚦 Semáforo Hojas de Ruta</div>
+        <div class="nav-item" data-id="inviables">❌ Proyectos Inviables</div>
+        <div class="nav-item" data-id="geografia">🗺️ Mapa de Problemáticas Geo</div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Report 1: Global -->
+        <section id="global" class="active">
+            <div class="header">
+                <h1>Resumen Ejecutivo: Estado de Salud del Portafolio</h1>
+                <p>Corte Estratégico Feb 2026</p>
+            </div>
+
+            <div class="card" style="text-align: center; padding: 1.5rem 2rem;">
+                <div class="stat-value" style="font-size: 3rem; line-height: 1;">4,500+</div>
+                <div class="stat-desc" style="justify-content: center; font-size: 1.1rem;">Total de soluciones de
+                    vivienda en gestión activa</div>
+
+                <div class="progress-segmented" id="global-progress-bar">
+                    <div class="segment segment-green" style="width: 60%;">60%</div>
+                    <div class="segment segment-orange" style="width: 15%;">15%</div>
+                    <div class="segment segment-red" style="width: 25%;">25%</div>
+                </div>
+
+                <div class="segment-legend" style="justify-content: center;">
+                    <div class="legend-item"><span class="dot" style="background:var(--accent)"></span> Terminados /
+                        Certificados</div>
+                    <div class="legend-item"><span class="dot" style="background:var(--warning)"></span> En Ejecución /
+                        Plan Rescate</div>
+                    <div class="legend-item"><span class="dot" style="background:var(--danger)"></span> Crítico /
+                        Jurídico / Invasión</div>
+                </div>
+            </div>
+
+            <!-- Global Category Dropdowns -->
+            <div id="global-categories-list" style="margin-top: 2rem;">
+                <!-- Populated via JS -->
+            </div>
+
+        </section>
+
+        <!-- Report 2: Panorama -->
+        <section id="panorama">
+            <div class="header">
+                <h1>Panorama Detallado por Programa</h1>
+                <p>Desglose de ejecución, valor y riesgo por bolsa de recursos</p>
+            </div>
+
+            <div class="grid grid-cols-6" id="program-cards" style="margin-bottom: 2rem;">
+                <!-- Re-ordered Program cards (PVG I, PVG II, VIPA, Macros, Desastres, Bolsas) will be populated here -->
+            </div>
+
+            <div class="program-list" id="program-panorama-list">
+                <!-- Detailed view for selected program will be rendered here -->
+            </div>
+
+            <div class="insight-box" style="margin-top: 2rem;">
+                <div class="insight-icon">💡</div>
+                <div class="insight-text">
+                    <strong>Información:</strong> Haga clic en cada programa para ver el desglose de proyectos, funnel
+                    de legalización o matrices de riesgo específicas.
+                </div>
+            </div>
+        </section>
+
+        <section id="riesgos">
+            <div class="header">
+                <h1>Matriz Estratégica de Riesgo y Resolutividad</h1>
+                <p>Clasificación de proyectos según Impacto/Riesgo vs. Resolubilidad</p>
+            </div>
+
+            <!-- Main Heatmap -->
+            <div class="card"
+                style="padding: 0; background: #fff; overflow: hidden; border: none; margin-bottom: 2rem;">
+                <div class="heatmap-container" id="risk-heatmap">
+                    <div class="heatmap-y-axis">Impacto / Riesgo (Bajo → Alto)</div>
+                    <div class="heatmap-x-axis">Resolubilidad (Baja → Alta)</div>
+
+                    <div class="heatmap-grid">
+                        <!-- Quadrants simplified: Only title and focus -->
+                        <div class="quadrant q-critico font-infographic">
+                            <div class="q-header">CRÍTICO</div>
+                            <div class="q-foco">Acción Jurídica Especializada</div>
+                        </div>
+                        <div class="quadrant q-complejo font-infographic">
+                            <div class="q-header">COMPLEJO</div>
+                            <div class="q-foco">Recuperar Activos y Garantías</div>
+                        </div>
+                        <div class="quadrant q-indeterminado font-infographic">
+                            <div class="q-header">INDETERMINADO</div>
+                            <div class="q-foco">Depuración e Inviabilidad</div>
+                        </div>
+                        <div class="quadrant q-operativo font-infographic">
+                            <div class="q-header">OPERATIVO</div>
+                            <div class="q-foco">"Fábrica de Cierres"</div>
+                        </div>
+
+                        <div id="heatmap-items-container" class="heatmap-items"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report 5: Hojas de Ruta -->
+        <section id="hojaruta">
+            <div class="header">
+                <h1>Semáforo de Hojas de Ruta</h1>
+                <p>Seguimiento detallado de frentes en proyectos estratégicos</p>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="filter-section card" style="margin-bottom: 1.5rem; background: rgba(59, 130, 246, 0.05);">
+                <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; padding: 1.25rem;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <input type="text" id="roadmapSearch" placeholder="🔍 Buscar proyecto o municipio..."
+                            class="search-input" onkeyup="filterRoadmaps()"
+                            style="width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; border: 1px solid #e2e8f0; font-size: 1rem;">
+                    </div>
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <span style="font-size: 0.9rem; font-weight: 700; color: #475569;">Categoría:</span>
+                        <select id="categoryFilter" onchange="filterRoadmaps()" class="filter-select"
+                            style="padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #e2e8f0; background: white; font-weight: 600;">
+                            <option value="all">Todas</option>
+                            <option value="Crítico">Crítico</option>
+                            <option value="Complejo">Complejo</option>
+                            <option value="Operativo">Operativo</option>
+                            <option value="Indeterminado">Indeterminado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div id="roadmap-cards-container" class="roadmap-flex-grid"
+                style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Roadmap cards injected here by app.js -->
+            </div>
+        </section>
+
+        <!-- Report 7: Inviables -->
+        <section id="inviables">
+            <div class="header">
+                <h1>Proyectos Inviables y Devolución de Recursos</h1>
+                <p>Monitoreo de procesos de liquidación, siniestros y reintegro al Tesoro Nacional</p>
+            </div>
+
+            <div id="inviables-container" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Populated via JS -->
+            </div>
+        </section>
+
+        <!-- Report 8: Mapa -->
+        <section id="geografia">
+            <div class="header">
+                <h1>Mapa de Problemáticas Geográficas</h1>
+                <p>Ubicación de focos críticos por factores externos e invasión</p>
+            </div>
+            <div id="map"></div>
+        </section>
+    </main>
+
+    <div id="projectModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Listado de Proyectos</h3>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <table class="project-list-table" id="modalProjectTable">
+                    <thead>
+                        <tr>
+                            <th>Proyecto</th>
+                            <th>Ubicación</th>
+                            <th>Viviendas</th>
+                            <th>Avance</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modalTableBody">
+                    </tbody>
+                </table>
+                <div id="modalDiagnosticView" style="display:none;">
+                    <!-- Content injected via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
