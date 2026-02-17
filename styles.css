@@ -754,31 +754,34 @@ section.active {
     background: white;
 }
 
-.heatmap-y-axis {
+.heatmap-y-axis-outer {
     position: absolute;
-    left: 25px;
+    left: 20px;
     top: 50%;
     transform: translateY(-50%) rotate(-90deg);
-    font-weight: 800;
-    color: #64748b;
-    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    /* Blue for high visibility */
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     white-space: nowrap;
+    z-index: 5;
 }
 
-.heatmap-x-axis {
+.heatmap-x-axis-outer {
     position: absolute;
-    bottom: 25px;
-    left: 55%;
-    /* Centered relative to the grid which starts at 80px */
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
-    font-weight: 800;
-    color: #64748b;
-    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    /* Blue for high visibility */
+    font-size: 0.9rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     white-space: nowrap;
+    z-index: 5;
 }
 
 .heatmap-grid {

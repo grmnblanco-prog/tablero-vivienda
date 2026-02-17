@@ -93,13 +93,25 @@
                 <p>Clasificación de proyectos según Impacto/Riesgo vs. Resolubilidad</p>
             </div>
 
-            <!-- Main Heatmap -->
-            <div class="card"
-                style="padding: 0; background: #fff; overflow: hidden; border: none; margin-bottom: 2rem;">
-                <div class="heatmap-container" id="risk-heatmap">
-                    <div class="heatmap-y-axis">Riesgo / Impacto (Bajo > Alto)</div>
-                    <div class="heatmap-x-axis">Probabilidad de Resolución (Baja > Alta)</div>
+            <!-- Matrix Controls -->
+            <div
+                style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; background: rgba(59, 130, 246, 0.05); padding: 1rem; border-radius: 0.75rem;">
+                <span style="font-size: 0.9rem; font-weight: 700; color: #475569;">Visualización:</span>
+                <button onclick="toggleHeatmapProjects()" id="toggleProjectsBtn" class="nav-item active"
+                    style="margin-bottom: 0; padding: 0.5rem 1.5rem; width: auto; font-size: 0.85rem;">
+                    🔍 Ver Proyectos (18)
+                </button>
+                <p style="margin: 0; font-size: 0.85rem; color: #64748b;">Haga clic para activar/desactivar la capa de
+                    proyectos sobre los cuadrantes.</p>
+            </div>
 
+            <!-- Main Heatmap Container with Outer Labels -->
+            <div
+                style="position: relative; padding: 20px 0 60px 60px; background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <!-- Outer Labels -->
+                <div class="heatmap-y-axis-outer">RIESGO / IMPACTO (BAJO > ALTO)</div>
+
+                <div class="heatmap-container" id="risk-heatmap" style="padding: 0; height: 600px;">
                     <div class="heatmap-grid">
                         <!-- Quadrants simplified: Only title and focus -->
                         <div class="quadrant q-critico font-infographic">
@@ -119,9 +131,11 @@
                             <div class="q-foco">"Fábrica de Cierres"</div>
                         </div>
 
-                        <div id="heatmap-items-container" class="heatmap-items"></div>
+                        <div id="heatmap-items-container" class="heatmap-items" style="display: none;"></div>
                     </div>
                 </div>
+                <!-- Outer Label Bottom -->
+                <div class="heatmap-x-axis-outer">PROBABILIDAD DE RESOLUCIÓN (BAJA > ALTA)</div>
             </div>
         </section>
 

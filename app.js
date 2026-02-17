@@ -870,6 +870,22 @@ function renderRoadmaps() {
     `).join('');
 }
 
+function toggleHeatmapProjects() {
+    const container = document.getElementById('heatmap-items-container');
+    const btn = document.getElementById('toggleProjectsBtn');
+    if (!container || !btn) return;
+
+    if (container.style.display === 'none') {
+        container.style.display = 'block';
+        btn.innerHTML = '✅ Ocultar Proyectos';
+        btn.classList.add('active');
+    } else {
+        container.style.display = 'none';
+        btn.innerHTML = '🔍 Ver Proyectos (18)';
+        btn.classList.remove('active');
+    }
+}
+
 function filterRoadmaps() {
     renderRoadmaps();
 }
