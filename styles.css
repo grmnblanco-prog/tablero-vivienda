@@ -756,32 +756,65 @@ section.active {
 
 .heatmap-y-axis-outer {
     position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%) rotate(-90deg);
+    left: 0;
+    top: 0;
+    width: 80px;
+    /* Matches padding-left in index.html */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    background: #f8fafc;
+    /* Subtle background for the axis area */
+}
+
+.heatmap-y-axis-outer span {
+    transform: rotate(-90deg);
+    white-space: nowrap;
     font-weight: 900;
-    color: var(--primary);
-    /* Blue for high visibility */
-    font-size: 0.9rem;
+    color: #1e293b;
+    /* Darker for better visibility */
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    white-space: nowrap;
-    z-index: 5;
 }
 
 .heatmap-x-axis-outer {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 0;
+    left: 80px;
+    right: 0;
+    height: 60px;
+    /* Matches padding-bottom in index.html */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    background: #f8fafc;
+}
+
+.heatmap-x-axis-outer span {
     font-weight: 900;
-    color: var(--primary);
-    /* Blue for high visibility */
-    font-size: 0.9rem;
+    color: #1e293b;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    white-space: nowrap;
-    z-index: 5;
+}
+
+.heatmap-toggle-btn.active {
+    background: var(--primary) !important;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.heatmap-toggle-btn:hover {
+    transform: translateY(-2px);
+    background: #cbd5e1 !important;
+}
+
+.heatmap-toggle-btn.active:hover {
+    background: #2563eb !important;
 }
 
 .heatmap-grid {

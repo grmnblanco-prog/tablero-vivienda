@@ -97,8 +97,8 @@
             <div
                 style="display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; background: rgba(59, 130, 246, 0.05); padding: 1rem; border-radius: 0.75rem;">
                 <span style="font-size: 0.9rem; font-weight: 700; color: #475569;">Visualización:</span>
-                <button onclick="toggleHeatmapProjects()" id="toggleProjectsBtn" class="nav-item active"
-                    style="margin-bottom: 0; padding: 0.5rem 1.5rem; width: auto; font-size: 0.85rem;">
+                <button onclick="toggleHeatmapProjects()" id="toggleProjectsBtn" class="heatmap-toggle-btn"
+                    style="margin-bottom: 0; padding: 0.6rem 1.5rem; width: auto; font-size: 0.85rem; border: none; border-radius: 0.75rem; background: #e2e8f0; color: #475569; font-weight: 800; cursor: pointer; transition: 0.2s;">
                     🔍 Ver Proyectos (18)
                 </button>
                 <p style="margin: 0; font-size: 0.85rem; color: #64748b;">Haga clic para activar/desactivar la capa de
@@ -107,12 +107,13 @@
 
             <!-- Main Heatmap Container with Outer Labels -->
             <div
-                style="position: relative; padding: 20px 0 60px 60px; background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                style="position: relative; padding: 0 0 60px 80px; background: #fff; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
                 <!-- Outer Labels -->
-                <div class="heatmap-y-axis-outer">RIESGO / IMPACTO (BAJO > ALTO)</div>
+                <div class="heatmap-y-axis-outer"><span>RIESGO / IMPACTO (BAJO > ALTO)</span></div>
 
-                <div class="heatmap-container" id="risk-heatmap" style="padding: 0; height: 600px;">
-                    <div class="heatmap-grid">
+                <div class="heatmap-container" id="risk-heatmap"
+                    style="padding: 0; height: 600px; border-left: 2px solid #e2e8f0; border-bottom: 2px solid #e2e8f0;">
+                    <div class="heatmap-grid" style="border:none;">
                         <!-- Quadrants simplified: Only title and focus -->
                         <div class="quadrant q-critico font-infographic">
                             <div class="q-header">CRÍTICO</div>
@@ -135,7 +136,7 @@
                     </div>
                 </div>
                 <!-- Outer Label Bottom -->
-                <div class="heatmap-x-axis-outer">PROBABILIDAD DE RESOLUCIÓN (BAJA > ALTA)</div>
+                <div class="heatmap-x-axis-outer"><span>PROBABILIDAD DE RESOLUCIÓN (BAJA > ALTA)</span></div>
             </div>
         </section>
 
